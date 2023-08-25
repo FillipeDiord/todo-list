@@ -41,20 +41,29 @@ function filterTodos() {
             !todo.textContent.toLocaleLowerCase().includes(inputValue)
         );
 
-        filteredValues.forEach((value => {
-            value.classList.remove('d-flex');
-            value.classList.add('hidden');
-        }));
+        removeClassBootstrap(filteredValues);
+        
 
         const returningValuesList = Array.from(referenceList.children).filter((todo) => 
             todo.textContent.toLocaleLowerCase().includes(inputValue)
         );
 
-        returningValuesList.forEach((value => {
-            value.classList.remove('hidden');
-            value.classList.add('d-flex');
-        }));
+        addClassBootstrap(returningValuesList);
     })
+}
+
+function removeClassBootstrap(filteredValues) {
+    filteredValues.forEach((value => {
+        value.classList.remove('d-flex');
+        value.classList.add('hidden');
+    }));
+}
+
+function addClassBootstrap(returningValuesList) {
+    returningValuesList.forEach((value => {
+        value.classList.remove('hidden');
+        value.classList.add('d-flex');
+    }));
 }
 
 addTodoList();
