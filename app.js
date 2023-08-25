@@ -19,4 +19,19 @@ function addTodoList() {
     })
 }
 
+function deleteTodo() {
+    const list = document.querySelector('.todos-container');
+
+    list.addEventListener('click', (event) => {
+        const itemTodo = event.target;
+
+        const checkDeleteClass = Array.from(itemTodo.classList).includes('delete');
+
+        if (checkDeleteClass) {
+            itemTodo.parentElement.remove();
+        }
+    });
+}
+
 addTodoList();
+deleteTodo();
