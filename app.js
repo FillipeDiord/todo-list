@@ -9,9 +9,9 @@ function addTodoList() {
 
         if (nameTodo) {
             referenceList.innerHTML +=
-                `<li class="list-group-item d-flex justify-content-between align-items-center">
+                `<li class="list-group-item d-flex justify-content-between align-items-center" data-todo="${nameTodo}">
                     <span>${nameTodo}</span>
-                    <i class="far fa-trash-alt delete"></i>
+                    <i class="far fa-trash-alt" data-trash="${nameTodo}"></i>
                 </li>`;
 
             event.target.reset();
@@ -22,11 +22,11 @@ function addTodoList() {
 function deleteTodo() {
     referenceList.addEventListener('click', (event) => {
         const itemTodo = event.target;
+        const trashDataValue = itemTodo.dataset.trash;
+        const todo = document.querySelector(`[data-todo="${trashDataValue}"]`);
 
-        const checkDeleteClass = Array.from(itemTodo.classList).includes('delete');
-
-        if (checkDeleteClass) {
-            itemTodo.parentElement.remove();
+        if (trashDataValue) {
+            todo.remove();
         }
     });
 }
@@ -37,14 +37,14 @@ function filterTodos() {
     inputReference.addEventListener('input', (event) => {
         const inputValue = event.target.value.trim().toLowerCase();
 
-        const filteredValues = Array.from(referenceList.children).filter((todo) => 
+        const filteredValues = Array.from(referenceList.children).filter((todo) =>
             !todo.textContent.toLocaleLowerCase().includes(inputValue)
         );
 
         removeClassBootstrap(filteredValues);
-        
 
-        const returningValuesList = Array.from(referenceList.children).filter((todo) => 
+
+        const returningValuesList = Array.from(referenceList.children).filter((todo) =>
             todo.textContent.toLocaleLowerCase().includes(inputValue)
         );
 
